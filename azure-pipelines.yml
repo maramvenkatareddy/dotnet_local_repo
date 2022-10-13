@@ -14,3 +14,12 @@ stages:
             inputs:
                 command: build
                 projects: '*.csproj'
+          - task: DotNetCoreCLI@2
+            inputs:
+                command: publish
+                publishWebProjects: True
+                arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+                zipAfterPublish: True
+          - task: PublishPipelineArtifact@1
+            inputs:
+                targetPath: '$(Build.ArtifactStagingDirectory)'
