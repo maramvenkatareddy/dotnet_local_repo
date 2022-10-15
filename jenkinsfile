@@ -18,6 +18,11 @@ pipeline {
                 sh 'dotnet build *.csproj'
             }
         }
+        stage ('archive the results') {
+            steps {
+                archive '/home/venkatareddy/dotnetcore-docs-hello-world/bin/Debug/net6.0/publish'
+            }
+        }
 
         stage ('craeate zip file') {
             steps {
