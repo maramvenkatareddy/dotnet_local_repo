@@ -1,0 +1,21 @@
+---
+pool: dotnet6
+
+trigger:
+  - master
+
+stages:
+  - stage: build
+    jobs:
+      - job: build
+        steps:
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+                command: build
+                projects: '*.csproj'
+          - task: DotNetCoreCLI@2
+            inputs:
+                command: publish
+                publishWebProjects: True
+                zipAfterPublish: True
